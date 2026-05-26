@@ -2,12 +2,22 @@ let
   pkgs0 = import <nixpkgs> { };
 in
 let
+  # # unstable
+  # nixpkgs = pkgs0.fetchFromGitHub {
+  #   owner = "NixOS";
+  #   repo = "nixpkgs";
+  #   rev = "nixos-unstable";
+  #   hash = "sha256-Ap9KJX+5xHIn3bPIpfNgT6MEXdAECECwo4/rmlQD74M=";
+  # };
+
+  # 25.11
   nixpkgs = pkgs0.fetchFromGitHub {
     owner = "NixOS";
     repo = "nixpkgs";
-    rev = "nixos-unstable";
-    hash = "sha256-Ap9KJX+5xHIn3bPIpfNgT6MEXdAECECwo4/rmlQD74M=";
+    rev = "nixos-25.11";
+    hash = "sha256-nOesoDCiXcUftqbRBMz9tt4blI5PvljMWbm3kuCA+0s=";
   };
+
   home-manager = ~/wt/nix-community/home-manager/ghc-missing-repro;
 in
 let
@@ -19,7 +29,7 @@ in
   test = eval-config {
     system = "x86_64-linux";
     modules = [
-      { system.stateVersion = "26.05"; }
+      { system.stateVersion = "25.11"; }
 
       # Auto login
       (mkAliasOptionModule [ "hm" ] [ "home-manager" "users" "alice" ])
@@ -61,7 +71,7 @@ in
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         hm.imports = [
-          { home.stateVersion = "26.05"; }
+          { home.stateVersion = "25.11"; }
           (
             { pkgs, lib, ... }:
             {
@@ -76,7 +86,10 @@ in
 
               xsession = {
                 enable = true;
-                windowManager.xmonad.enable = true;
+                windowManager.xmonad = {
+                  enable = true;
+                  enableContribAndExtras = true;
+                };
               };
 
               xdg.configFile."xmonad" = {
