@@ -6,13 +6,16 @@ let
   nixpkgs = pkgs0.fetchFromGitHub {
     owner = "NixOS";
     repo = "nixpkgs";
-    rev = "nixos-unstable";
+    rev =
+      # nixos-unstable
+      "64c08a7ca051951c8eae34e3e3cb1e202fe36786";
     hash = "sha256-tpyBcxPpcQb8ukyNF7DoCwfSY3VPsxHoYwj00Cayv5o=";
   };
   home-manager = pkgs0.fetchFromGitHub {
     owner = "nix-community";
     repo = "home-manager";
-    rev = "release-26.05";
+    rev = # "release-26.05"
+      "b179bde238977f7d4454fc770b1a727eaf55111c";
     hash = "sha256-RUkMrREjKDQrA+dA9+xZviGAxM5W1aVdyOr/bSYpHrE=";
   };
 in
