@@ -10,14 +10,15 @@ let
   #   hash = "sha256-Ap9KJX+5xHIn3bPIpfNgT6MEXdAECECwo4/rmlQD74M=";
   # };
 
-  # 25.11
-  nixpkgs = pkgs0.fetchFromGitHub {
-    owner = "NixOS";
-    repo = "nixpkgs";
-    rev = "nixos-25.11";
-    hash = "sha256-nOesoDCiXcUftqbRBMz9tt4blI5PvljMWbm3kuCA+0s=";
-  };
+  # # 25.11
+  # nixpkgs = pkgs0.fetchFromGitHub {
+  #   owner = "NixOS";
+  #   repo = "nixpkgs";
+  #   rev = "nixos-25.11";
+  #   hash = "sha256-nOesoDCiXcUftqbRBMz9tt4blI5PvljMWbm3kuCA+0s=";
+  # };
 
+  nixpkgs = ~/wt/NixOS/nixpkgs/ghc-missing-repro;
   home-manager = ~/wt/nix-community/home-manager/ghc-missing-repro;
 in
 let
