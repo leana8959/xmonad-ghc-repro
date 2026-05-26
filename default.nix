@@ -1,7 +1,20 @@
 let
-  # Used for bisect, the result was that https://github.com/nixos/nixpkgs/pull/507470 changed the result.
-  nixpkgs = ~/wt/NixOS/nixpkgs/ghc-missing-repro;
-  home-manager = ~/wt/nix-community/home-manager/ghc-missing-repro;
+  pkgs0 = import <nixpkgs> { };
+in
+let
+  # since https://github.com/nixos/nixpkgs/pull/507470, xmonad 0.18.1 it stopped working
+  nixpkgs = pkgs0.fetchFromGitHub {
+    owner = "NixOS";
+    repo = "nixpkgs";
+    rev = "nixos-unstable";
+    hash = "sha256-tpyBcxPpcQb8ukyNF7DoCwfSY3VPsxHoYwj00Cayv5o=";
+  };
+  home-manager = pkgs0.fetchFromGitHub {
+    owner = "nix-community";
+    repo = "home-manager";
+    rev = "release-26.05";
+    hash = "sha256-RUkMrREjKDQrA+dA9+xZviGAxM5W1aVdyOr/bSYpHrE=";
+  };
 in
 let
   eval-config = import (nixpkgs + "/nixos/lib/eval-config.nix");
@@ -63,7 +76,7 @@ in
               # [ghc, cabal-install] -> needs hackage tarball
               # [ghc] -> no error, no compilation
               home.packages = [
-                # pkgs.ghc
+                pkgs.ghc
                 pkgs.cabal-install
               ];
 
