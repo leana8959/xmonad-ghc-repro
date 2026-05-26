@@ -1,23 +1,5 @@
 let
-  pkgs0 = import <nixpkgs> { };
-in
-let
-  # # unstable
-  # nixpkgs = pkgs0.fetchFromGitHub {
-  #   owner = "NixOS";
-  #   repo = "nixpkgs";
-  #   rev = "nixos-unstable";
-  #   hash = "sha256-Ap9KJX+5xHIn3bPIpfNgT6MEXdAECECwo4/rmlQD74M=";
-  # };
-
-  # # 25.11
-  # nixpkgs = pkgs0.fetchFromGitHub {
-  #   owner = "NixOS";
-  #   repo = "nixpkgs";
-  #   rev = "nixos-25.11";
-  #   hash = "sha256-nOesoDCiXcUftqbRBMz9tt4blI5PvljMWbm3kuCA+0s=";
-  # };
-
+  # Used for bisect, the result was that https://github.com/nixos/nixpkgs/pull/507470 changed the result.
   nixpkgs = ~/wt/NixOS/nixpkgs/ghc-missing-repro;
   home-manager = ~/wt/nix-community/home-manager/ghc-missing-repro;
 in
